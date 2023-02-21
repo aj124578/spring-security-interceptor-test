@@ -1,14 +1,19 @@
 package shop.mtcoding.springsecu.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import shop.mtcoding.springsecu.dto.user.UserReq.JoinReqDto;
 import shop.mtcoding.springsecu.handler.ex.CustomException;
+import shop.mtcoding.springsecu.service.UserService;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/join")
     public String join(JoinReqDto joinReqDto){
@@ -26,7 +31,7 @@ public class UserController {
             throw new CustomException("email을 작성해주세요");
         } 
 
-        // userService.회원가입(joinReqDto); 
+        userService.회원가입(joinReqDto); 
       
         return "redirect:/loginForm";
     }

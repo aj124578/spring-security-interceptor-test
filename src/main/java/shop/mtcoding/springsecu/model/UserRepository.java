@@ -10,6 +10,8 @@ import shop.mtcoding.springsecu.model.user.User;
 @Mapper
 public interface UserRepository {
 
+    public User findByUsername(String username);
+
     public List<User> findAll();
 
     public User findById(int id);
@@ -19,4 +21,5 @@ public interface UserRepository {
     public int updateById(User user);
 
     public int deleteById(int id);
+
 }
