@@ -24,13 +24,16 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(LoginReqDto loginReqDto) {
+        System.out.println(loginReqDto.getUsername());
+        System.out.println(loginReqDto.getPassword());
+
         if (loginReqDto.getUsername() == null || loginReqDto.getUsername().isEmpty()) {
             throw new CustomException("username을 작성해주세요");
         }
         if (loginReqDto.getPassword() == null || loginReqDto.getPassword().isEmpty()) {
             throw new CustomException("password를 작성해주세요");
         }
-        // User principal = userService.로그인(loginReqDto);
+        User principal = userService.로그인(loginReqDto);
 
         session.setAttribute("principal", principal);
         return "redirect:/";

@@ -5,12 +5,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import shop.mtcoding.springsecu.dto.user.UserReq.JoinReqDto;
+import shop.mtcoding.springsecu.dto.user.UserReq.LoginReqDto;
 import shop.mtcoding.springsecu.model.user.User;
 
 @Mapper
 public interface UserRepository {
 
     public User findByUsername(String username);
+    
+    public User findByUsernameAndPassword(LoginReqDto loginReqDto);
 
     public List<User> findAll();
 
