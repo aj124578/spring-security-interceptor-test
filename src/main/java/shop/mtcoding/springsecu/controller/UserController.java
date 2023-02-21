@@ -1,10 +1,14 @@
 package shop.mtcoding.springsecu.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import shop.mtcoding.springsecu.dto.user.UserReq.JoinReqDto;
@@ -72,6 +76,12 @@ public class UserController {
 
     @GetMapping("/user/main")
     public String mainForm() {
+        // 1. 인증체크
+        User principal = (User) session.getAttribute("principal");
+        if (principal == null) {
+            throw new CustomException("인증이 되지 않았습니다.", HttpStatus.UNAUTHORIZED);
+        }
+ 
         return "user/main";
     }
 
