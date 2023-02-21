@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import shop.mtcoding.springsecu.dto.user.UserReq.JoinReqDto;
 import shop.mtcoding.springsecu.dto.user.UserReq.LoginReqDto;
 import shop.mtcoding.springsecu.model.user.User;
+import shop.mtcoding.springsecu.util.PasswordHash;
 
 
 // F - DS - C - S - R - MyBatis - DB
@@ -50,13 +51,19 @@ public class UserRepositoryTest {
         joinReqDto.setPassword("1234");
         joinReqDto.setEmail("cos@nate.com");
 
+        String pw = PasswordHash.getPasswordHash(joinReqDto.getPassword());
+        joinReqDto.setPassword(pw);
+        System.out.println("테스트2 pw : " + pw);
+
         ObjectMapper om = new ObjectMapper();
         // when
         int reuslt = userRepository.insert(joinReqDto);
         String responseBody = om.writeValueAsString(reuslt); 
         System.out.println("테스트 : " + responseBody);
+       
 
         // then
         assertThat(reuslt).isEqualTo(1);
+
     }
 }

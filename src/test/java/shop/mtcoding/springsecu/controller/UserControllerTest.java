@@ -33,6 +33,7 @@ public class UserControllerTest {
         // when
         ResultActions resultActions = mvc.perform(post("/join").content(requestBody)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
+               
 
         // then
         resultActions.andExpect(status().is3xxRedirection());
@@ -50,10 +51,11 @@ public class UserControllerTest {
 
                 HttpSession session = resultActions.andReturn().getRequest().getSession();
                 User principal = (User) session.getAttribute("principal");
-                System.out.println(principal.getUsername());
+                
 
         // then
         assertThat(principal.getUsername()).isEqualTo("ssar");
+        
         resultActions.andExpect(status().is3xxRedirection());
     }
 }
