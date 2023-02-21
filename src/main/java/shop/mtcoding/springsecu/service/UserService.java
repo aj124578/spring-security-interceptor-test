@@ -22,7 +22,7 @@ public class UserService {
         User sameUser = userRepository.findByUsername(joinReqDto.getUsername());
         String pw = PasswordHash.getPasswordHash(joinReqDto.getPassword());
         joinReqDto.setPassword(pw);
-        
+        System.out.println("테스트 : " + pw);
 
         if (sameUser != null) {
             throw new CustomException("동일한 username이 존재합니다");
