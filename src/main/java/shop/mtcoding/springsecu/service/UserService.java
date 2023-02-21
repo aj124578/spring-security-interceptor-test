@@ -15,7 +15,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional // insert가 동시에 안되고 메서드 자체는 동시에 가능함. 하지만 동시접근 불가능으로 생각하면
+    @Transactional 
     public void 회원가입(JoinReqDto joinReqDto){
         User sameUser = userRepository.findByUsername(joinReqDto.getUsername());
         if (sameUser != null) {
@@ -26,6 +26,4 @@ public class UserService {
             throw new CustomException("회원가입실패");
         }
     }
-
-
 }
